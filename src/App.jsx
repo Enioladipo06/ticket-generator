@@ -5,6 +5,7 @@ import patternTop from "./assets/images/pattern-squiggly-line-top.svg";
 import patternBottom from "./assets/images/pattern-squiggly-line-bottom-desktop.svg";
 import patternBottomMobile from "./assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg";
 import "./App.css";
+import LoadingScreen from "./components/LoadingScreen";
 
 export default function App() {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ export default function App() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-bg-desktop bg-cover bg-center flex items-center justify-center text-white md:bg-bg-tablet lg:bg-bg-desktop overflow-hidden">
@@ -38,12 +40,15 @@ export default function App() {
       </picture>
 
       <div className="relative z-20 w-full flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 lg:px-20">
-        {!isSubmitted ? (
+        {isLoading ? (
+          <LoadingScreen />
+        ) : !isSubmitted ? (
           <div className="w-full flex justify-center">
                <TicketForm
             formData={formData}
             setFormData={setFormData}
             setIsSubmitted={setIsSubmitted}
+            setIsLoading={setIsLoading}
           />
           </div>
         ) : (
